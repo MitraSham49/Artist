@@ -19,7 +19,7 @@ public class MainController {
         return"index"  ;
     }
     @RequestMapping("/addsong")
-    public  String addPet(Model model){
+    public  String addSong(Model model){
         model.addAttribute( "aSong", new Song());
         return"addsong" ;
     }
@@ -28,6 +28,24 @@ public class MainController {
         if (result.hasErrors()){
             return"addsong";
         }
-        return"/index" ;
+        return"index" ;
     }
+
+    @RequestMapping("/addartist")
+    public  String addArtist(Model model){
+        model.addAttribute( "aArtist", new Artist());
+        return"addartist" ;
+    }
+    @RequestMapping("/saveartist")
+    public  String saveArtist(@Valid @ModelAttribute("aArtist") Artist toSave, BindingResult result){
+        if (result.hasErrors()){
+            return"addartist";
+        }
+
+        if(toSave.getImage().isEmpty())
+            toSave.setImage("/img/tedy.jpg");
+        artRepo.save (toSave);
+        return"index" ;
+    }
+
 }

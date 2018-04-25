@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="www.thymeleaf.org">
-<head th:replace="/fragments/navbase::navhead">
+<head >
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+-->
 </head>
 <body>
 
-
-<span th:replace="/fragments/navbase::scripts"></span>
+<div th:each="eachArtiste:${allartistes}">
+    <h2 th:text="${eachArtiste.fullName}"></h2>
+    <h3 th:text="${eachArtiste.stageName}==null?'':'('+${eachArtiste.stageName}+')'"></h3>
+    <div th:each="eachSong:${eachArtiste.mySongs}">
+        <p th:text="${eachSong.title}"></p>
+    </div>
+</div>
+<!--<span th:replace="/fragments/navbase::scripts"></span>-->
 </body>
 </html>

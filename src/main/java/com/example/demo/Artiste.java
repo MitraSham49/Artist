@@ -13,17 +13,20 @@ public class Artiste {
     private String fullName;
     private  String stageName;
     private String image;
-    @ManyToMany(mappedBy = "leadArtiste")
-    Set<Song> mySongs;
+    @OneToMany(mappedBy = "leadArtiste")
+     private Set<Song> mySongs;
 
     public Artiste() {
         mySongs = new HashSet<>();
     }
 
-    public Artiste(String fullName) {
+    public Artiste(String fullName, String stageName, String image, Set<Song> mySongs) {
         this.fullName = fullName;
-        mySongs = new HashSet<>();
+        this.stageName = stageName;
+        this.image = image;
+        this.mySongs = mySongs;
     }
+
 
     public long getId() {
         return id;
@@ -65,6 +68,7 @@ public class Artiste {
                 '}';
     }
 
+
     public Set<Song> getMySongs() {
         return mySongs;
     }
@@ -72,5 +76,4 @@ public class Artiste {
     public void setMySongs(Set<Song> mySongs) {
         this.mySongs = mySongs;
     }
-
 }

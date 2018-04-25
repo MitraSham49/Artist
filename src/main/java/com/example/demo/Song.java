@@ -15,12 +15,9 @@ public class Song {
 
     //There are many songs, but each of them is led by ONE artiste.
     //The Artiste's ID is repsresented in the song table as leadArtiste
-    @ManyToMany()
-    Set<Artiste> leadArtiste;
-
-    public Song() {
-        leadArtiste = new HashSet<>();
-    }
+    @ManyToOne()
+    private  Artiste leadArtiste;
+    public Song(){}
 
     public Song(String title) {
         this.title = title;
@@ -51,14 +48,11 @@ public class Song {
         this.year = year;
     }
 
-    public Set<Artiste> getLeadArtiste() {
+    public Artiste getLeadArtiste() {
         return leadArtiste;
     }
 
-    public void setLeadArtiste(Set<Artiste> leadArtiste) {
+    public void setLeadArtiste(Artiste leadArtiste) {
         this.leadArtiste = leadArtiste;
     }
-
-
-
 }

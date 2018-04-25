@@ -25,7 +25,24 @@ public class MainController {
     }
 
 
+    @RequestMapping("/addartistes")
+    public  String addArtiste(Model model){
+        model.addAttribute( "aArtiste", new Artiste());
+        return"addartistes" ;
+    }
 
+    @RequestMapping("/saveartistes")
+    public  String saveArtiste( @Valid @ModelAttribute ("aArtiste") Artiste toSave, BindingResult result){
+        if (result.hasErrors()){
+            return"addartistes";
+        }
+        if(toSave.getImage().isEmpty())
+            toSave.setImage("/img/tedy.jpg");
+        artistes.save (toSave);
+        return "redirect:/";
+    }
+
+    /*
     @RequestMapping("/addartistes")
     public @ResponseBody String addArtist(){
         //This prepopulates the database.
@@ -46,7 +63,7 @@ public class MainController {
 
         return artistes.findAll().toString();
     }
-
+*/
 
     /*
      *Need test data? Add these songs

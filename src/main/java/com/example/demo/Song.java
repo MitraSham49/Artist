@@ -1,9 +1,8 @@
 package com.example.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -13,7 +12,19 @@ public class Song {
     private long id;
     private String title;
      private  long  year;
-     private String leadArtist;
+
+    //There are many songs, but each of them is led by ONE artiste.
+    //The Artiste's ID is repsresented in the song table as leadArtiste
+    @ManyToMany()
+    Set<Artiste> leadArtiste;
+
+    public Song() {
+        leadArtiste = new HashSet<>();
+    }
+
+    public Song(String title) {
+        this.title = title;
+    }
 
 
     public long getId() {
@@ -40,11 +51,14 @@ public class Song {
         this.year = year;
     }
 
-    public String getLeadArtist() {
-        return leadArtist;
+    public Set<Artiste> getLeadArtiste() {
+        return leadArtiste;
     }
 
-    public void setLeadArtist(String leadArtist) {
-        this.leadArtist = leadArtist;
+    public void setLeadArtiste(Set<Artiste> leadArtiste) {
+        this.leadArtiste = leadArtiste;
     }
+
+
+
 }

@@ -1,12 +1,11 @@
 package com.example.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class Artist {
+public class Artiste {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -14,6 +13,17 @@ public class Artist {
     private String fullName;
     private  String stageName;
     private String image;
+    @ManyToMany(mappedBy = "leadArtiste")
+    Set<Song> mySongs;
+
+    public Artiste() {
+        mySongs = new HashSet<>();
+    }
+
+    public Artiste(String fullName) {
+        this.fullName = fullName;
+        mySongs = new HashSet<>();
+    }
 
     public long getId() {
         return id;
@@ -46,4 +56,21 @@ public class Artist {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Artiste{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                '}';
+    }
+
+    public Set<Song> getMySongs() {
+        return mySongs;
+    }
+
+    public void setMySongs(Set<Song> mySongs) {
+        this.mySongs = mySongs;
+    }
+
 }
